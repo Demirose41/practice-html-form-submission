@@ -107,16 +107,21 @@ const server = http.createServer((req, res) => {
     }
 
     // Your code here
-    // cat = new Cat(
-    //   req.body.name, 
-    //   req.body.pattern,
-    //   req.body.size,
-    //   req.body.description
-    // )
-    cat = new Cat(req.body)
-    res.setHeader("Location", "/");
-    res.statusCode = 302;
-    return res.end();
+
+    if(req.method === "POST" && req.url === '/cat'){
+      cat = new Cat(req.body)
+      res.setHeader("Location", "/");
+      res.statusCode = 302;
+      return res.end();
+      
+    }
+    if(req.method === "POST" && req.url === '/dog'){
+      dog = new Dog(req.body)
+      res.setHeader("Location", "/");
+      res.statusCode = 302;
+      return res.end();
+      
+    }
     res.statusCode = 404;
     res.end("Page Not Found");
     return;
